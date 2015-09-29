@@ -1,0 +1,103 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#include "bdaqctrl.h"
+#include "compatibility.h"
+#pragma hdrstop
+using namespace Automation::BDaq;
+
+#include "Main_Advantech.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TForm1 *Form1;
+//---------------------------------------------------------------------------
+__fastcall TForm1::TForm1(TComponent* Owner)
+  : TForm(Owner)
+{
+  Parar = false;
+  DO_Data = 0;
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Button1Click(TObject *Sender)
+{
+ErrorCode ret;
+
+   // Step 1: create 'InstantAoCtrl' object
+   InstantAoCtrl * ctrl = AdxInstantAoCtrlCreate();
+
+   do
+   {
+      // Step 2: select the device with 'ModeWriteWithReset' mode
+      int deviceNumber = 0;
+      DeviceInformation devInfo(deviceNumber);
+      ret = ctrl->setSelectedDevice(devInfo);
+      if (ret != Success) {
+         Memo1->Lines->Add("open device failed. error code = %x\n" + ret);
+         break;
+      }
+
+      // Step 3:  *** configure the channels if needed ***
+      AoChannelCollection *channels = ctrl->getChannels();
+      for (int i = 0; i < channels->getCount(); ++i) {
+         channels->getItem(i).setValueRange(V_0To5);
+      }
+
+      // Step 4: scan the channels
+      int32 const chStart = 0;
+      int32 const chCount = 2;
+      
+      // generate waveform data
+      double values[chCount];
+      for (int i = 0; i < chCount; ++i) {
+          values[i] = 2;
+      }
+
+      ctrl->Write(chStart, chCount, values);
+   }while (!(Parar));
+
+   // Step 5: close device and release any allocated resource.
+   ctrl->Cleanup();
+
+   // Step 6: destroy the object
+   ctrl->Dispose();   
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Button2Click(TObject *Sender)
+{
+  CA->Finalizar();
+  Timer1->Enabled = false;;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button3Click(TObject *Sender)
+{
+  CA = new Control_Advantech(false);
+  Timer1->Enabled = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button4Click(TObject *Sender)
+{
+  CA->SetVolante(Edit1->Text.ToDouble());
+  CA->SetAcelerador(Edit2->Text.ToDouble());
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::CheckBox1Click(TObject *Sender)
+{
+  DO_Data = CheckBox1->Checked+CheckBox2->Checked*2+CheckBox3->Checked*4+CheckBox4->Checked*8+CheckBox5->Checked*16+CheckBox6->Checked*32+CheckBox7->Checked*64+CheckBox8->Checked*128;
+  CA->Set_DO_Data(DO_Data);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Timer1Timer(TObject *Sender)
+{
+  AnsiString espacio = AnsiString ("     ");
+  Memo1->Lines->Add(AnsiString(CA->Get_AI_Data(0))+espacio+AnsiString(CA->Get_AI_Data(1))+espacio+AnsiString(CA->Get_AI_Data(2))+espacio+AnsiString(CA->Get_AI_Data(3))+espacio+AnsiString(CA->Get_AI_Data(4))+espacio+AnsiString(CA->Get_AI_Data(5))+espacio+AnsiString(CA->Get_AI_Data(6))+espacio+AnsiString(CA->Get_AI_Data(7)));
+}
+//---------------------------------------------------------------------------
+

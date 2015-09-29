@@ -1,0 +1,33 @@
+//---------------------------------------------------------------------------
+
+
+#pragma hdrstop
+
+#include "TramaGPS.h"
+
+//---------------------------------------------------------------------------
+
+#pragma package(smart_init)
+//---------------------------------------------------------------------------
+TramaGPS::TramaGPS()
+{
+  BarraRrecibido = false;
+  Trama = AnsiString();
+
+
+}
+//---------------------------------------------------------------------------
+AnsiString TramaGPS::AddCaracter(AnsiString Caracter)
+{
+  Trama += Caracter;
+  if (Caracter == AnsiString("\r"))
+    BarraRrecibido = true;
+  if ((Caracter == AnsiString("\n")) && BarraRrecibido){
+    BarraRrecibido = false;
+    return Trama;
+  }
+  return AnsiString();
+
+
+}
+//---------------------------------------------------------------------------

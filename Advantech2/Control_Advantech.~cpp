@@ -1,0 +1,164 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#include <math.h>
+#pragma hdrstop
+
+#include "Control_Advantech.h"
+#pragma package(smart_init)
+//---------------------------------------------------------------------------
+
+//   Important: Methods and properties of objects in VCL can only be
+//   used in a method called using Synchronize, for example:
+//
+//      Synchronize(UpdateCaption);
+//
+//   where UpdateCaption could look like:
+//
+//      void __fastcall Control_Advantech::UpdateCaption()
+//      {
+//        Form1->Caption = "Updated in a thread";
+//      }
+//---------------------------------------------------------------------------
+
+__fastcall Control_Advantech::Control_Advantech(bool CreateSuspended)
+  : TThread(CreateSuspended)
+{
+    //Abrir el driver
+      int deviceNumber = 0;
+      DeviceInformation devInfo(deviceNumber);
+
+
+
+   //Volante: AO canal 0. range: +/- 10v
+   //Acelerador: AO canal 1. range: 0-5v
+      Analog_Output = AdxInstantAoCtrlCreate();
+      Analog_Output->setSelectedDevice(devInfo);
+
+      AoChannelCollection *channels = Analog_Output->getChannels();
+      channels->getItem(0).setValueRange(V_Neg10To10);
+      channels->getItem(1).setValueRange(V_0To5);
+
+
+
+
+
+   //Velocidad: AI canal 1. range: 0-5v
+    Analog_Input = AdxInstantAiCtrlCreate();
+    Analog_Input->setSelectedDevice(devInfo);
+    AiChannelCollection *ai_channels = Analog_Input->getChannels();
+    ai_channels->getItem(0).setValueRange(V_0To5);
+    ai_channels->getItem(1).setValueRange(V_0To5);
+    ai_channels->getItem(2).setValueRange(V_0To5);
+    ai_channels->getItem(3).setValueRange(V_0To5);
+    ai_channels->getItem(4).setValueRange(V_0To5);
+    ai_channels->getItem(5).setValueRange(V_0To5);
+    ai_channels->getItem(6).setValueRange(V_0To5);
+    ai_channels->getItem(7).setValueRange(V_0To5);
+    ai_channels->getItem(8).setValueRange(V_0To5);
+    ai_channels->getItem(9).setValueRange(V_0To5);
+    ai_channels->getItem(10).setValueRange(V_0To5);
+    ai_channels->getItem(11).setValueRange(V_0To5);
+    ai_channels->getItem(12).setValueRange(V_0To5);
+    ai_channels->getItem(13).setValueRange(V_0To5);
+    ai_channels->getItem(14).setValueRange(V_0To5);
+    ai_channels->getItem(15).setValueRange(V_0To5);
+
+
+
+   //Configuro a 0 el buffer de las salidas digitales
+    Digital_Output = AdxInstantDoCtrlCreate();
+    Digital_Output->setSelectedDevice(devInfo);
+    Digital_Output->Write(0,1,0);
+    DO_0 = false;
+
+
+   //Configuro las Digital Input
+    Digital_Input = AdxInstantDiCtrlCreate();
+    Digital_Input->setSelectedDevice(devInfo);
+
+
+    Fin = false;
+    FreeOnTerminate = true;
+}
+//---------------------------------------------------------------------------
+void __fastcall Control_Advantech::Execute()
+{
+  while (!(Fin)){
+    Analog_Output->Write(0,Dato_AO_0);
+    Analog_Output->Write(1,Dato_AO_1);
+
+    Analog_Input->Read(0,16,AI_Data);
+
+    Digital_Input->Read(0, DI_Data);
+
+    Digital_Output->Write(0, DO_Data);
+
+  }
+
+   // Step 5: close device and release any allocated resource.
+   Analog_Output->Cleanup();
+   Analog_Input->Cleanup();
+   Digital_Input->Cleanup();
+   Digital_Output->Cleanup();
+
+   // Step 6: destroy the object
+   Analog_Output->Dispose();
+   Analog_Input->Dispose();
+   Digital_Input->Cleanup();
+   Digital_Output->Cleanup();
+}
+//---------------------------------------------------------------------------
+
+//Set voltaje volante por AnalogOutput0
+void Control_Advantech::SetVolante(double voltaje){
+
+   Valor_Set_Volante = voltaje;
+   Dato_AO_0 = voltaje;
+
+}
+//---------------------------------------------------------------------------
+//Set voltaje acelerador por AnalogOutput1
+void Control_Advantech::SetAcelerador(double voltaje)
+{
+
+   Valor_Set_Acelerador = voltaje;
+   Dato_AO_1 = voltaje;
+}
+//---------------------------------------------------------------------------
+void Control_Advantech::Finalizar()
+{
+        Fin = true;
+}
+//--------------------------------------------------------------------------
+Byte Control_Advantech::Get_DI_Data()
+{
+    return DI_Data;
+}
+
+//--------------------------------------------------------------------------
+double Control_Advantech::Get_AI_Data(int n)
+{
+/*  double redondeo  =  AI_Data[n]*10.0;
+  redondeo = ceil (redondeo);
+  return redondeo/10.0;*/
+  return  AI_Data[n];
+}
+//--------------------------------------------------------------------------
+void Control_Advantech::Set_DO_Data(Byte Valor)
+{
+  DO_Data = Valor;
+}
+//--------------------------------------------------------------------------
+void Control_Advantech::Swith_DO_0()
+{
+  DO_0 = !DO_0;
+}
+//--------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------
+
+
+

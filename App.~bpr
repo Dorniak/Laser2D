@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="App.exe"/>
+    <OBJFILES value="App.obj main.obj Laser.obj LectorDatos.obj Puertos.obj ControlPSerie.obj 
+      Recepgps.obj Rs232c.obj UBUFFobj.obj FineTime.obj Fichero.obj Pintar.obj 
+      TDatosPintar.obj ThreadLecturaGPS.obj LatLong-UTMconversion.obj 
+      StringTokenizer.obj TramaGPS.obj Advantech2\Control_Advantech.obj 
+      CAN\xlCANFunctions.obj CLASES\deteccion.obj CLASES\obstaculo.obj 
+      CLASES\punto.obj CLASES\adelantamiento.obj"/>
+    <RESFILES value="App.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) main.dfm"/>
+    <LIBFILES value="CAN\vxlapi_coff.lib"/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value="vcl.lib rtl.lib"/>
+    <PACKAGES value="vcl.bpi rtl.bpi dbrtl.bpi adortl.bpi vcldb.bpi vclx.bpi bdertl.bpi 
+      vcldbx.bpi ibxpress.bpi dsnap.bpi cds.bpi bdecds.bpi qrpt.bpi teeui.bpi 
+      teedb.bpi tee.bpi dss.bpi teeqr.bpi visualclx.bpi visualdbclx.bpi 
+      dsnapcrba.bpi dsnapcon.bpi bcbsmp.bpi vclie.bpi xmlrtl.bpi inet.bpi 
+      inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
+      bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
+      indy.bpi bcb2kaxserver.bpi"/>
+    <PATHCPP value=".;Advantech2;CAN;CLASES;CLASES;CLASES;CLASES"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value="_DEBUG"/>
+    <SYSDEFINES value="_RTLDLL;NO_STRICT;USEPACKAGES"/>
+    <MAINSOURCE value="App.cpp"/>
+    <INCLUDEPATH value="E:\CLASES;CLASES;CAN;Advantech2;Advantech;C:\Borland\CBuilder6\Projects;..\28_02_11_02\Programa;&quot;C:\Program Files\Borland\CBuilder6\Projects&quot;;C:\Users\Dani\Desktop\App;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="E:\CLASES;CLASES;CAN;Advantech2;Advantech;C:\Borland\CBuilder6\Projects;..\28_02_11_02\Programa;&quot;C:\Program Files\Borland\CBuilder6\Projects&quot;;C:\Users\Dani\Desktop\App;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-IE:\CLASES -ICLASES -ICAN -IAdvantech2 -IAdvantech 
+      -IC:\Borland\CBuilder6\Projects -I..\28_02_11_02\Programa 
+      -I&quot;C:\Program Files\Borland\CBuilder6\Projects&quot; 
+      -IC:\Users\Dani\Desktop\App -I$(BCB)\include -I$(BCB)\include\vcl 
+      -src_suffix cpp -D_DEBUG -boa"/>
+    <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -b- -k -y -v -vi- -c 
+      -tW -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -$A8 -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj $(PACKAGES) Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="App.res" FORMNAME="" UNITNAME="App.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="App.cpp" FORMNAME="" UNITNAME="App" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="main.cpp" FORMNAME="Principal" UNITNAME="main" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Laser.cpp" FORMNAME="" UNITNAME="Laser" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="LectorDatos.cpp" FORMNAME="" UNITNAME="LectorDatos" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Puertos.cpp" FORMNAME="" UNITNAME="Puertos" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ControlPSerie.cpp" FORMNAME="" UNITNAME="ControlPSerie" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Recepgps.cpp" FORMNAME="" UNITNAME="Recepgps.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Rs232c.cpp" FORMNAME="" UNITNAME="Rs232c.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="UBUFFobj.cpp" FORMNAME="" UNITNAME="UBUFFobj.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="FineTime.cpp" FORMNAME="" UNITNAME="FineTime" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Fichero.cpp" FORMNAME="" UNITNAME="Fichero" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Pintar.cpp" FORMNAME="" UNITNAME="Pintar" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TDatosPintar.cpp" FORMNAME="" UNITNAME="TDatosPintar" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ThreadLecturaGPS.cpp" FORMNAME="" UNITNAME="ThreadLecturaGPS" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="LatLong-UTMconversion.cpp" FORMNAME="" UNITNAME="LatLong-UTMconversion" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="StringTokenizer.cpp" FORMNAME="" UNITNAME="StringTokenizer" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TramaGPS.cpp" FORMNAME="" UNITNAME="TramaGPS" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Advantech2\Control_Advantech.cpp" FORMNAME="" UNITNAME="Control_Advantech" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CAN\xlCANFunctions.cpp" FORMNAME="" UNITNAME="xlCANFunctions" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CAN\vxlapi_coff.lib" FORMNAME="" UNITNAME="vxlapi_coff.lib" CONTAINERID="LibTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CLASES\deteccion.cpp" FORMNAME="" UNITNAME="deteccion.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CLASES\obstaculo.cpp" FORMNAME="" UNITNAME="obstaculo.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CLASES\punto.cpp" FORMNAME="" UNITNAME="punto.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CLASES\adelantamiento.cpp" FORMNAME="" UNITNAME="adelantamiento" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=3082
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

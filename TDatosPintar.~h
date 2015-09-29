@@ -1,0 +1,27 @@
+//---------------------------------------------------------------------------
+
+#ifndef TDatosPintarH
+#define TDatosPintarH
+
+#include "Pintar.h"
+
+//---------------------------------------------------------------------------
+class TDatosPintar
+{
+
+private:
+
+        
+
+public:
+        TDatosPintar();
+        double datosPintar[3][750];
+        void resetearArray();
+        double coordenadas[2][750];
+        void convertirDatos();
+        Pintar *P;
+};
+
+
+#endif
+ 
